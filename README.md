@@ -5,6 +5,9 @@ This package uses quick.db, which is an easy to use database wrapper for better-
 
 Data is grouped by country, location, and dates.
 
+## Install
+`npm i -S covid19-json`
+
 ## Usage
 ```
 const Covid19 = require('covid19-json')
