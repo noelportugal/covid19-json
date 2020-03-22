@@ -39,7 +39,7 @@ const express = require("express")
 const app = express()
 const Covid19 = require('covid19-json')
 const covid19 = new Covid19()
-const port = 9898
+const port = process.env.PORT || 9898
 
 app.get("/covid19/confirmed", async function(req, res) {
   let data = await covid19.geTimeSeriesData('confirmed')
