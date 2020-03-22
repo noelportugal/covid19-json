@@ -5,22 +5,22 @@ const covid19 = new Covid19()
 const port = 9898
 
 
-app.get("/covid-19/confirmed", async function(req, res) {
+app.get("/covid19/confirmed", async function(req, res) {
   let data = await covid19.geTimeSeriesData('confirmed')
   res.send(data)
 })
 
-app.get("/covid-19/recovered", async function(req, res) {
+app.get("/covid19/recovered", async function(req, res) {
   let data = await covid19.geTimeSeriesData('recovered')
   res.send(data)
 })
 
-app.get("/covid-19/deaths", async function(req, res) {
+app.get("/covid19/deaths", async function(req, res) {
   let data = await covid19.geTimeSeriesData('deaths')
   res.send(data)
 })
 
-app.get("/covid-19/:date?", async function(req, res) {
+app.get("/covid19/:date?", async function(req, res) {
   let data = await covid19.getData(req.params.date)
   res.send(data)
 })
