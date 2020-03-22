@@ -7,24 +7,37 @@ Data is grouped by country, location, and dates.
 
 ## Usage
 ```
-const Covid19 = require('covid-19')
+const Covid19 = require('covid19-json')
 const covid19 = new Covid19()
 
 // Get latest daily report
-let data = await covid19.getData()
+async function daily() {
+  let data = await covid19.getData()
+  console.log(data)
+}
 
-// Get specific day report (starting from 01-22-2020)
-let data = await covid19.getData('MM-DD-2020')
+// Get specific day report (starting from 01-22-2020) * Format 'MM-DD-YYYY'
+async function day() {
+  let data = await covid19.getData('01-22-2020')
+  console.log(data)
+}
 
 // Get time series ('confirmed', 'recovered', 'deaths')
-let data = await covid19.geTimeSeriesData('confirmed')
+async function timeseries() {
+  let data = await covid19.geTimeSeriesData('confirmed')
+  console.log(data)
+}
+
+daily()
+day()
+timeseries()
 ```
 
 ## Use wih Express
 ```
 const express = require("express")
 const app = express()
-const Covid19 = require('covid-19')
+const Covid19 = require('covid19-json')
 const covid19 = new Covid19()
 const port = 9898
 
