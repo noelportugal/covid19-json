@@ -6,7 +6,7 @@ This package uses quick.db, which is an easy to use database wrapper for better-
 Data is grouped by country, location, and dates.
 
 ## 03/23/2020 update. 
-The Data model changed a bit so the package was updated accordingly.
+The Data model fromn Johns Hopkins CSSE changed a bit so the package was updated accordingly.
 
 ## Install
 `npm i -S covid19-json`
