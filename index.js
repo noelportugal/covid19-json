@@ -10,7 +10,7 @@ class Covid19 {
     async getData(date) {
         let data = {}
         if (date != null) {
-            date = moment(date).format('MM-DD-YYYY')
+            date = moment(date, 'MM-DD-YYYY').format('MM-DD-YYYY')
             data = await this.fetchData(date)
         } else {
             date = moment().format('MM-DD-YYYY')
@@ -72,15 +72,31 @@ class Covid19 {
         .fromStream(request.get(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/${date}.csv`))
         .subscribe(async (json) => {
           return new Promise((resolve,reject) => {
-            var obj = {
-              country: json['Country/Region'] || '',
-              state: json['Province/State'] || '',
-              lat: json['Latitude'] || '0.0',
-              lon: json['Longitude'] || '0.0', 
-              lastUpdate: json['Last Update'] || '',
-              confirmed: parseInt(json['Confirmed']) || 0,
-              deaths: parseInt(json['Deaths']) || 0,
-              recovered: parseInt(json['Recovered']) || 0
+            var obj = {}
+            if (moment(date, 'MM-DD-YYYY') <= moment('03-22-2020', 'MM-DD-YYYY')) {
+              console.log('before 03-23-2020')
+              obj = {
+                country: json['Country/Region'] || '',
+                state: json['Province/State'] || '',
+                lat: json['Latitude'] || '0.0',
+                lon: json['Longitude'] || '0.0', 
+                lastUpdate: json['Last Update'] || '',
+                confirmed: parseInt(json['Confirmed']) || 0,
+                deaths: parseInt(json['Deaths']) || 0,
+                recovered: parseInt(json['Recovered']) || 0
+              }
+            } else {
+              console.log('after 03-22-2020')
+              obj = {
+                country: json['Country_Region'] || '',
+                state: json['Province_State'] || '',
+                lat: json['Lat'] || '0.0',
+                lon: json['Long_'] || '0.0', 
+                lastUpdate: json['Last_Update'] || '',
+                confirmed: parseInt(json['Confirmed']) || 0,
+                deaths: parseInt(json['Deaths']) || 0,
+                recovered: parseInt(json['Recovered']) || 0
+              }
             }
             locations.push(obj)
             resolve()
@@ -177,15 +193,15 @@ class Covid19 {
         var countries = []
         let min = moment('2020-01-22')
         let max = moment()
-        let initCapType = type.charAt(0).toUpperCase() + type.slice(1)
+        //let initCapType = type.charAt(0).toUpperCase() + type.slice(1)
         await  csv()
-        .fromStream(request.get(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-${initCapType}.csv`))
+        .fromStream(request.get(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_${type}_global.csv`))
         .subscribe(async (json) => {
           return new Promise((resolve,reject) => {
             var location = {
               country: json['Country/Region'] || '',
               state: json['Province/State'] || '',
-              lat: json['Lat'] || '0.0',
+              lat: json['Lat'] || '0.0',  
               lon: json['Long'] || '0.0', 
             }
             let dates = []

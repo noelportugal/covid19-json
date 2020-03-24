@@ -5,6 +5,9 @@ This package uses quick.db, which is an easy to use database wrapper for better-
 
 Data is grouped by country, location, and dates.
 
+## 03/23/2020 update. 
+The Data model changed a bit so the package was updated accordingly.
+
 ## Install
 `npm i -S covid19-json`
 
@@ -25,7 +28,7 @@ async function day() {
   console.log(data)
 }
 
-// Get time series ('confirmed', 'recovered', 'deaths')
+// Get time series ('confirmed', 'deaths')
 async function timeseries() {
   let data = await covid19.geTimeSeriesData('confirmed')
   console.log(data)

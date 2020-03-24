@@ -10,11 +10,6 @@ app.get("/covid19/confirmed", async function(req, res) {
   res.send(data)
 })
 
-app.get("/covid19/recovered", async function(req, res) {
-  let data = await covid19.geTimeSeriesData('recovered')
-  res.send(data)
-})
-
 app.get("/covid19/deaths", async function(req, res) {
   let data = await covid19.geTimeSeriesData('deaths')
   res.send(data)
